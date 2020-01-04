@@ -26,14 +26,26 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    //@ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
-    
+    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    private User user;
     private String name;
     private String description;
 
     public Hobby()
     {
     }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+  
 
     public Hobby(String name, String description)
     {
