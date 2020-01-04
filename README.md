@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ChrisSkov/ca3back.svg?branch=master)](https://travis-ci.org/ChrisSkov/ca3back)
+[![Build Status](https://travis-ci.com/ChrisSkov/exampractice1.svg?branch=master)
 Back end code for to use as start code for future shitty projects. 
 
 To makes this work follow these steps:
