@@ -8,7 +8,6 @@ import facades.fetchFacade;
 import java.io.IOException;
 import java.net.ProtocolException;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,9 +27,9 @@ import utils.EMF_Creator;
 @Path("info")
 public class APIResource {
 
-    private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
-    private fetchFacade api = new fetchFacade();
-    private static UserFacade FACADE = UserFacade.getUserFacade(EMF);
+    private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
+    private final fetchFacade api = new fetchFacade();
+    private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     @Context
     private UriInfo context;
@@ -57,7 +56,8 @@ public class APIResource {
         {
             List<User> users = em.createQuery("select user from User user").getResultList();
             return "[" + users.size() + "]";
-        } finally
+        }
+        finally
         {
             em.close();
         }

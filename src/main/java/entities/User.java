@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,22 +32,28 @@ public class User implements Serializable {
     @Column(name = "user_pass")
     private String userPass;
     @JoinTable(name = "user_roles", joinColumns =
-    {
-        @JoinColumn(name = "user_name", referencedColumnName = "user_name")
+       {
+           @JoinColumn(name = "user_name", referencedColumnName = "user_name")
     }, inverseJoinColumns =
-    {
-        @JoinColumn(name = "role_name", referencedColumnName = "role_name")
+       {
+           @JoinColumn(name = "role_name", referencedColumnName = "role_name")
     })
     @ManyToMany
     private List<Role> roleList = new ArrayList();
 
     private String email, firstName, lastName;
     private int phone;
- //   @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = Address.class)
-   // private Address address;
-   // @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
-   // private Hobby hobbies;
+    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = Address.class)
+    private List<Address> address;
+    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    private List<Hobby> hobbies;
 
+    
+    
+    public User()
+    {
+    }
+    
     
     //Username/PW constructor. create simple user without fluff. 
     public User(String userName, String userPass)
@@ -58,38 +61,18 @@ public class User implements Serializable {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
     }
-
-    public User(String userName, String userPass, String email, String firstName, String lastName, int phone /*,Address address, Hobby hobbies*/)
+//create advanced user
+    public User(String userName, String userPass, String email, String firstName, String lastName, int phone, List<Address> address, List<Hobby> hobbies)
     {
         this.userName = userName;
-        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+        this.userPass = userPass;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-      //  this.address = address;
-       // this.hobbies = hobbies;
+        this.address = address;
+        this.hobbies = hobbies;
     }
-
-//    public Address getAddress()
-//    {
-//        return address;
-//    }
-//
-//    public void setAddress(Address address)
-//    {
-//        this.address = address;
-//    }
-
-//    public Hobby getHobbies()
-//    {
-//        return hobbies;
-//    }
-//
-//    public void setHobbies(Hobby hobbies)
-//    {
-//        this.hobbies = hobbies;
-//    }
 
     public List<String> getRolesAsStrings()
     {
@@ -105,9 +88,6 @@ public class User implements Serializable {
         return rolesAsStrings;
     }
 
-    public User()
-    {
-    }
 
     public boolean verifyPassword(String pw)
     {
@@ -121,6 +101,26 @@ public class User implements Serializable {
             System.out.println("It does not match");
         }
         return false;
+    }
+
+    public List<Address> getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(List<Address> address)
+    {
+        this.address = address;
+    }
+
+    public List<Hobby> getHobbies()
+    {
+        return hobbies;
+    }
+
+    public void setHobbies(List<Hobby> hobbies)
+    {
+        this.hobbies = hobbies;
     }
 
     public String getEmail()

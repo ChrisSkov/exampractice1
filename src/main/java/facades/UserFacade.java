@@ -1,11 +1,12 @@
 package facades;
 
-//import entities.Address;
-//import entities.Hobby;
+import entities.Address;
+import entities.Hobby;
 import entities.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import errorhandling.AuthenticationException;
+import java.util.List;
 
 /**
  * @author lam@cphbusiness.dk
@@ -84,25 +85,25 @@ public class UserFacade {
 //        System.out.println(user.getUserName());
 //    }
     //create advanced user with all params
-//    public User createAdvancedUser(String userName, String userPass, String email, String firstName, String lastName, int phone, Address address, Hobby hobbies)
-//    {
-//        if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
-//        {
-//            User u = new User(userName, userPass, email, firstName, lastName, phone, address, hobbies);
-//            EntityManager em = getEntityManager();
-//            try
-//            {
-//                em.getTransaction().begin();
-//                em.persist(u);
-//                em.getTransaction().commit();
-//                return u;
-//            } finally
-//            {
-//                em.close();
-//            }
-//        }
-//        return null;
-//    }
+    public User createAdvancedUser(String userName, String userPass, String email, String firstName, String lastName, int phone, List<Address> address, List<Hobby> hobbies)
+    {
+        if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
+        {
+            User u = new User(userName, userPass, email, firstName, lastName, phone, address, hobbies);
+            EntityManager em = getEntityManager();
+            try
+            {
+                em.getTransaction().begin();
+                em.persist(u);
+                em.getTransaction().commit();
+                return u;
+            } finally
+            {
+                em.close();
+            }
+        }
+        return null;
+    }
 
     public Object getAllUsers()
     {
