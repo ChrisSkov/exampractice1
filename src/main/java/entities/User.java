@@ -46,10 +46,10 @@ public class User implements Serializable {
 
     private String email, firstName, lastName;
     private int phone;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = Address.class)
-    private Address address;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
-    private Hobby hobbies;
+ //   @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = Address.class)
+   // private Address address;
+   // @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+   // private Hobby hobbies;
 
     
     //Username/PW constructor. create simple user without fluff. 
@@ -59,7 +59,7 @@ public class User implements Serializable {
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
     }
 
-    public User(String userName, String userPass, String email, String firstName, String lastName, int phone, Address address, Hobby hobbies)
+    public User(String userName, String userPass, String email, String firstName, String lastName, int phone /*,Address address, Hobby hobbies*/)
     {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
@@ -67,29 +67,29 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.address = address;
-        this.hobbies = hobbies;
+      //  this.address = address;
+       // this.hobbies = hobbies;
     }
 
-    public Address getAddress()
-    {
-        return address;
-    }
+//    public Address getAddress()
+//    {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address)
+//    {
+//        this.address = address;
+//    }
 
-    public void setAddress(Address address)
-    {
-        this.address = address;
-    }
-
-    public Hobby getHobbies()
-    {
-        return hobbies;
-    }
-
-    public void setHobbies(Hobby hobbies)
-    {
-        this.hobbies = hobbies;
-    }
+//    public Hobby getHobbies()
+//    {
+//        return hobbies;
+//    }
+//
+//    public void setHobbies(Hobby hobbies)
+//    {
+//        this.hobbies = hobbies;
+//    }
 
     public List<String> getRolesAsStrings()
     {
