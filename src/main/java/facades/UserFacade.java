@@ -15,20 +15,15 @@ public class UserFacade {
     private static EntityManagerFactory emf;
     private static UserFacade instance;
 
+    public UserFacade()
+    {
+    }
+
     /**
      *
      * @param _emf
      * @return the instance of this facade.
      */
-    private UserFacade()
-    {
-    }
-
-    private EntityManager getEntityManager()
-    {
-        return emf.createEntityManager();
-    }
-
     public static UserFacade getUserFacade(EntityManagerFactory _emf)
     {
         if (instance == null)
@@ -57,7 +52,11 @@ public class UserFacade {
         return user;
     }
 
-    //create simple user
+    private EntityManager getEntityManager()
+    {
+        return emf.createEntityManager();
+    }
+
     public User createUser(String userName, String userPass)
     {
         if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
@@ -78,6 +77,12 @@ public class UserFacade {
         return null;
     }
 
+//    public static void main(String[] args)
+//    {
+//        //UserFacade uf = instance;
+//        User user = instance.createUser(user.getUserName(), user.getUserPass());
+//        System.out.println(user.getUserName());
+//    }
     //create advanced user with all params
     public User createAdvancedUser(String userName, String userPass, String email, String firstName, String lastName, int phone, Address address, Hobby hobbies)
     {
@@ -97,6 +102,16 @@ public class UserFacade {
             }
         }
         return null;
+    }
+
+    public Object getAllUsers()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getAllZips()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

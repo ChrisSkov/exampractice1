@@ -6,10 +6,12 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -22,17 +24,30 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    private User user;
     
-   private String street;
-   private String city;
-   private int zip;
+    private String street;
+    private String city;
+    private int zip;
 
     public Address()
     {
     }
 
-    public Address(String street, String city, int zip)
+    public User getUser()
     {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public Address(User user, String street, String city, int zip)
+    {
+        this.user = user;
         this.street = street;
         this.city = city;
         this.zip = zip;
@@ -67,8 +82,6 @@ public class Address implements Serializable {
     {
         this.zip = zip;
     }
-   
-   
 
     public int getId()
     {
@@ -109,5 +122,5 @@ public class Address implements Serializable {
     {
         return "entities.Address[ id=" + id + " ]";
     }
-    
+
 }

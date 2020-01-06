@@ -1,7 +1,9 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entities.User;
+import facades.UserFacade;
 import facades.fetchFacade;
 import java.io.IOException;
 import java.net.ProtocolException;
@@ -28,7 +30,8 @@ public class APIResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private fetchFacade api = new fetchFacade();
-
+    private static UserFacade FACADE = UserFacade.getUserFacade(EMF);
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     @Context
     private UriInfo context;
 
@@ -37,7 +40,8 @@ public class APIResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getInfoForAll() {
+    public String getInfoForAll()
+    {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
@@ -45,13 +49,16 @@ public class APIResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers() {
+    public String allUsers()
+    {
 
         EntityManager em = EMF.createEntityManager();
-        try {
+        try
+        {
             List<User> users = em.createQuery("select user from User user").getResultList();
             return "[" + users.size() + "]";
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
@@ -60,7 +67,8 @@ public class APIResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")
     @RolesAllowed("user")
-    public String getFromUser() {
+    public String getFromUser()
+    {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
     }
@@ -69,18 +77,19 @@ public class APIResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("admin")
     @RolesAllowed("admin")
-    public String getFromAdmin() {
+    public String getFromAdmin()
+    {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
-    
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("AllSpells/{index}")
     //@RolesAllowed("user")
-    public String getAllSpells(@PathParam("index") int index) throws ProtocolException, IOException {
+    public String getAllSpells(@PathParam("index") int index) throws ProtocolException, IOException
+    {
         return api.getDnDData(index);
     }
-    
+
 }
