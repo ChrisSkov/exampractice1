@@ -19,6 +19,7 @@ import javax.persistence.Table;
  *
  * @author Chris
  */
+
 @Entity
 @Table(name = "address")
 public class Address implements Serializable {
@@ -27,9 +28,9 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    @ManyToMany(cascade = CascadeType.PERSIST/*, targetEntity = User.class*/)
     private List<User> user;
-    
+
     private String street;
     private String city;
     private int zip;
@@ -55,8 +56,6 @@ public class Address implements Serializable {
     {
         this.user = user;
     }
-
-  
 
     public String getStreet()
     {

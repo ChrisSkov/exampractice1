@@ -54,7 +54,7 @@ public class APIResource {
         EntityManager em = EMF.createEntityManager();
         try
         {
-            List<User> users = em.createQuery("select user from User user").getResultList();
+            List<User> users = em.createQuery("select u from User u").getResultList();
             return "[" + users.size() + "]";
         }
         finally

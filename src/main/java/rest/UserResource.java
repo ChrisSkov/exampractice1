@@ -44,7 +44,7 @@ public class UserResource {
             {
                 MediaType.APPLICATION_JSON
             })
-    @RolesAllowed("user")
+    //@RolesAllowed("user")
     public String findSpells()
     {
         return "spells";

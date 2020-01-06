@@ -43,7 +43,7 @@ public class User implements Serializable {
 
     private String email, firstName, lastName;
     private int phone;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = Address.class)
+    @ManyToMany(cascade = CascadeType.PERSIST/*, targetEntity = Address.class*/)
     private List<Address> address;
     @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
     private List<Hobby> hobbies;
