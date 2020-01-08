@@ -44,9 +44,10 @@ public class User implements Serializable {
 
     private String email, firstName, lastName;
     private int phone;
-    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Address.class)
+    //@ManyToOne(cascade = CascadeType.PERSIST, mappedBy = "User" targetEntity = Address.class)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Address address;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy ="user", targetEntity = Hobby.class)
     private List<Hobby> hobbies;
 
     

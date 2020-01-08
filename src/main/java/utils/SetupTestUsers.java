@@ -18,11 +18,11 @@ public class SetupTestUsers {
     EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     EntityManager em = emf.createEntityManager();
     
-    // IMPORTAAAAAAAAAANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // This breaks one of the MOST fundamental security rules in that it ships with default users and passwords
-    // CHANGE the three passwords below, before you uncomment and execute the code below
-    // Also, either delete this file, when users are created or rename and add to .gitignore
-    // Whatever you do DO NOT COMMIT and PUSH with the real passwords
+//     IMPORTAAAAAAAAAANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//     This breaks one of the MOST fundamental security rules in that it ships with default users and passwords
+//     CHANGE the three passwords below, before you uncomment and execute the code below
+//     Also, either delete this file, when users are created or rename and add to .gitignore
+//     Whatever you do DO NOT COMMIT and PUSH with the real passwords
 
     User user = new User("user", "1234");
     User admin = new User("admin", "1234");
@@ -45,9 +45,11 @@ public class SetupTestUsers {
     admin.addRole(adminRole);
     both.addRole(userRole);
     both.addRole(adminRole);
+    advanced.addRole(userRole);
     em.persist(userRole);
     em.persist(adminRole);
     em.persist(user);
+    em.persist(advanced);
     em.persist(admin);
     em.persist(both);
     em.getTransaction().commit();

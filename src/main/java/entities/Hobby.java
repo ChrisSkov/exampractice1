@@ -27,7 +27,7 @@ public class Hobby implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> user;
     private String name;
     private String description;
@@ -84,13 +84,7 @@ public class Hobby implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 0;
-        hash += (int) id;
-        return hash;
-    }
+ 
 
     @Override
     public boolean equals(Object object)

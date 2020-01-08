@@ -28,7 +28,8 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", targetEntity = User.class)
+    //@OneToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
+    @OneToMany
     private List<User> user;
 
     private String street;
