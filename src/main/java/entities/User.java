@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,8 +44,8 @@ public class User implements Serializable {
 
     private String email, firstName, lastName;
     private int phone;
-    @ManyToMany(cascade = CascadeType.PERSIST/*, targetEntity = Address.class*/)
-    private List<Address> address;
+    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Address.class)
+    private Address address;
     @ManyToMany(cascade = CascadeType.PERSIST, targetEntity = User.class)
     private List<Hobby> hobbies;
 
@@ -61,8 +62,9 @@ public class User implements Serializable {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
     }
-//create advanced user
-    public User(String userName, String userPass, String email, String firstName, String lastName, int phone, List<Address> address, List<Hobby> hobbies)
+    //create advanced user
+
+    public User(String userName, String userPass, String email, String firstName, String lastName, int phone, Address address, List<Hobby> hobbies)
     {
         this.userName = userName;
         this.userPass = userPass;
@@ -74,6 +76,16 @@ public class User implements Serializable {
         this.hobbies = hobbies;
     }
 
+    public Address getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(Address address)
+    {
+        this.address = address;
+    }
+ 
     public List<String> getRolesAsStrings()
     {
         if (roleList.isEmpty())
@@ -103,16 +115,7 @@ public class User implements Serializable {
         return false;
     }
 
-    public List<Address> getAddress()
-    {
-        return address;
-    }
-
-    public void setAddress(List<Address> address)
-    {
-        this.address = address;
-    }
-
+ 
     public List<Hobby> getHobbies()
     {
         return hobbies;

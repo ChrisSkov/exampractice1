@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,7 +28,7 @@ public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToMany(cascade = CascadeType.PERSIST/*, targetEntity = User.class*/)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", targetEntity = User.class)
     private List<User> user;
 
     private String street;
@@ -39,9 +39,9 @@ public class Address implements Serializable {
     {
     }
 
-    public Address(List<User> user, String street, String city, int zip)
+    public Address( String street, String city, int zip)
     {
-        this.user = user;
+       // this.user = user;
         this.street = street;
         this.city = city;
         this.zip = zip;

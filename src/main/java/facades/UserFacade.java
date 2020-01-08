@@ -58,6 +58,7 @@ public class UserFacade {
         return emf.createEntityManager();
     }
 
+    //create basic user
     public User createUser(String userName, String userPass)
     {
         if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
@@ -85,7 +86,7 @@ public class UserFacade {
 //        System.out.println(user.getUserName());
 //    }
     //create advanced user with all params
-    public User createAdvancedUser(String userName, String userPass, String email, String firstName, String lastName, int phone, List<Address> address, List<Hobby> hobbies)
+    public User createAdvancedUser(String userName, String userPass, String email, String firstName, String lastName, int phone, Address address, List<Hobby> hobbies)
     {
         if (userName != null && !userName.isEmpty() && userPass != null && !userPass.isEmpty())
         {
