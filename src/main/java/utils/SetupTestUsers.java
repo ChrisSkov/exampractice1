@@ -27,8 +27,8 @@ public class SetupTestUsers {
     User user = new User("user", "1234");
     User admin = new User("admin", "1234");
     User both = new User("user_admin", "1234");
-    Hobby hobbies = new Hobby("satan","s");
-    Hobby hobbies2 = new Hobby("ddd","ddddd");
+    Hobby hobbies = new Hobby("Drinking beer","skåååålll");
+    Hobby hobbies2 = new Hobby("DnD","Is it Thursday yet?");
     List<Hobby> hobbies3 = new ArrayList<>();
     hobbies3.add(hobbies);
     hobbies3.add(hobbies2);
